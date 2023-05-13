@@ -11,7 +11,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 
 
 function AppRoutes(): JSX.Element {
-    const { isAuthenticated } = useAuth0();
+    const  isAuthenticated  =  true; //useAuth0();
     return (
         <Routes>
                 <Route element={<GuardedRoute
@@ -30,7 +30,6 @@ function AppRoutes(): JSX.Element {
                     <Route path={SETTINGS_ROUTE} element={<SettingsPage />} />
                 </Route>
         </Routes>
-
     );
 };
 
