@@ -13,6 +13,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 function AppRoutes(): JSX.Element {
     const  isAuthenticated  =  true; //useAuth0();
     return (
+        <>
         <Routes>
                 <Route element={<GuardedRoute
                     isRouteAccessible={!isAuthenticated}
@@ -28,8 +29,11 @@ function AppRoutes(): JSX.Element {
                     <Route path={MONITORING_ROUTE} element={<MonitoringPage />} />
                     <Route path={SUS_ROUTE} element={<SusPage />} />
                     <Route path={SETTINGS_ROUTE} element={<SettingsPage />} />
+                    <Route element={<Footer />} />
                 </Route>
         </Routes>
+        {isAuthenticated && <Footer />}
+        </>
     );
 };
 

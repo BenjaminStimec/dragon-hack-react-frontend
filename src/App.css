@@ -25,9 +25,9 @@ body{
 }
 .footer{
   height: 60px;
-  margin: 20px;
+  margin: 20px auto;
+  max-width: 1200px;
   
-
 }
 
 .css-16lloyr-MuiBottomNavigation-root {
@@ -43,7 +43,9 @@ body{
   justify-content: center;
   align-items: flex-end;
   height: calc(100% - 100px);
+  
 }
+
 
 .talkButton{
   position: absolute;
