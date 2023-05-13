@@ -5,14 +5,15 @@ import Footer from "./Footer";
 
 function ControlPage(){
     return (
-        <div>
+        <>
         <div className="page">
             <div className="talkButton">
                 <IconButton size="large"><MicRounded/>Press</IconButton>
             </div>
             <Input></Input>
         </div>
-        </div>
+        <Footer/>
+        </>
 
     )
 };
