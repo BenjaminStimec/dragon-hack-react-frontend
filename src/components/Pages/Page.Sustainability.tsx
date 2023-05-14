@@ -3,6 +3,7 @@ import { Settings, MonitorHeartOutlined, NearMe, MicRounded } from "@mui/icons-m
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import DeviceSustainability from "../Sustainability/DeviceSustainability";
+import PieChart from "../PieChart";
 
 interface DeviceData {
         name: string,
@@ -30,6 +31,10 @@ function SustainabilityPage() {
                     tip={device.tip}
                 />
             )}
+            <PieChart/>
+            <h1>Device Usage</h1>
+            <div>Device usage</div>
+            <h1>Sustainability Tips</h1>
             test {React.version}
         </div>
     )
