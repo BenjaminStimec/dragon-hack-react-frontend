@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import axios from "axios";
-import { IconButton, TextField } from "@mui/material";
-import { MicRounded } from "@mui/icons-material";
+import { IconButton, TextField, Button } from "@mui/material";
+import { MicRounded, Send } from "@mui/icons-material";
+import { Console } from "console";
 
 function ControlPage() {
     const [recording, setRecording] = useState(false);
@@ -38,18 +39,34 @@ function ControlPage() {
         await axios.post("http://localhost:3000/openAI/string-upload", { data: res.data });
     };
 
+    const inputTextRef = useRef();
+
+    const handleText = async () => {
+        // Send the response received to the other endpoint
+        var text = inputTextRef.current.value;
+        if(!text || text.trim() === "") return;
+        await axios.post("http://localhost:3000/openAI/string-upload", { data: text });
+    };
+
+    // TextField directly calls "http://localhost:3000/openAI/string-upload"!
+
     return (
         <div className="page">
             <div className="talkButton">
-                <IconButton size="large" onClick={handleClick}><MicRounded />Press</IconButton>
+                <IconButton color="primary" size="large" onClick={handleClick}><MicRounded />Press</IconButton>
             </div>
-            //TextField directly calls "http://localhost:3000/openAI/string-upload"!
-            <TextField
-                id="outlined-multiline-flexible"
-                label="Type what you want to do"
-                multiline
-                maxRows={8}
-            />
+            <div className="inputTextContainer">
+                <TextField
+                    className="inputText"
+                    id="outlined-multiline-flexible"
+                    label="Type what you want to do"
+                    multiline
+                    maxRows={8}
+                    inputRef={inputTextRef} 
+                />
+                <Button variant="contained" endIcon={<Send />} onClick={handleText}>Send</Button>
+            </div>
+
         </div>
     )
 };
