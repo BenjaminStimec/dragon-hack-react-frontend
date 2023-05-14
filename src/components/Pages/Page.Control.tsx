@@ -45,7 +45,7 @@ function ControlPage() {
         const res = await axios.post("http://localhost:3000/openAI/audio-upload", formData);
         
         // Send the response received to the other endpoint
-        await axios.post("http://localhost:3000/openAI/string-upload", { data: res.data });
+        await axios.post("http://localhost:3000/openAI/string-upload", { "text": res.data });
 
     };
 
@@ -55,7 +55,7 @@ function ControlPage() {
         // Send the response received to the other endpoint
         var text = inputTextRef.current.value;
         if(!text || text.trim() === "") return;
-        await axios.post("http://localhost:3000/openAI/string-upload", { data: text });
+        await axios.post("http://localhost:3000/openAI/string-upload", { "text": text });
     };
 
     // TextField directly calls "http://localhost:3000/openAI/string-upload"!

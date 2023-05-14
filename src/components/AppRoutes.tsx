@@ -12,7 +12,7 @@ import React from 'react';
 
 
 function AppRoutes(): JSX.Element {
-    const  isAuthenticated  =  false; //useAuth0();
+    const  isAuthenticated  =  true; //useAuth0();
     return (
         <>
         <Routes>
