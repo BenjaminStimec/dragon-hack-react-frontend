@@ -1,13 +1,14 @@
 import { IconButton } from "@mui/material";
 import {Settings, MonitorHeartOutlined, NearMe, MicRounded} from "@mui/icons-material";
 import React from "react";
-
-function SusPage(){
+import LoginButton from "../LoginButton";
+import Graph from "../Graph";
+function SetPage(){
     return (
         <div className="page">
-        test {React.version}
+        {<LoginButton/>}
         </div>
     )
 };
 
-export default SusPage;
+export default SetPage;

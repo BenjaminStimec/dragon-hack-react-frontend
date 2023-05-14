@@ -4,6 +4,7 @@ import './App.css'
 import AppRoutes from './components/AppRoutes';
 import { useAuth0 } from '@auth0/auth0-react';
 import Loading from './components/Loading';
+import React from 'react';
 
 function App() {
   const { isLoading } = useAuth0();

@@ -1,14 +1,17 @@
 import { IconButton } from "@mui/material";
 import {Settings, MonitorHeartOutlined, NearMe, MicRounded} from "@mui/icons-material";
 import React from "react";
-import LoginButton from "./LoginButton";
-import Graph from "./Graph";
-function SetPage(){
+
+interface DeviceGraphProps{
+    data:{name:string, x_axis:string, y_axis:string, data:[{x:Date, y:number}]};
+}
+function DeviceGraph(props: DeviceGraphProps){
     return (
+        
         <div className="page">
-        {<LoginButton/>}
+            //graph display!
         </div>
     )
 };
 
-export default SetPage;
+export default DeviceGraph;
