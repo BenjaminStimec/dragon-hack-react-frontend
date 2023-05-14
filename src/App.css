@@ -47,6 +47,8 @@ body{
   float: left;
 }
 
+
+
 .deviceName{
   color: rgba(0, 0, 0, 0.77);
   font-size: larger;
@@ -127,7 +129,14 @@ body{
   align-items: center;
   flex-direction: column;
 }
+.chart{
+  flex-direction: column;
+  align-items: center;
+}
 
+.pieChart{
+  height: 50%;
+}
 
 .talkButton{
   position: absolute;
