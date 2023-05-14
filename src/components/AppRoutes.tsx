@@ -16,27 +16,22 @@ function AppRoutes(): JSX.Element {
     return (
         <>
         <Routes>
-		<Route element={<GuardedRoute
+		    <Route element={<GuardedRoute
                     isRouteAccessible={!isAuthenticated}
                     redirectRoute={HOME_ROUTE}
                 />}>
                     <Route path={LOGIN_ROUTE} element={<SetPage />} />
-                </Route>
-                <Route element={<GuardedRoute
-                    isRouteAccessible={isAuthenticated}
-                    redirectRoute={LOGIN_ROUTE}
-                />}>
-                    <Route path={HOME_ROUTE} element={<ControlPage />} />
-                    <Route path={MONITORING_ROUTE} element={<MonitoringPage />} />
-                    <Route path={SUS_ROUTE} element={<SusPage />} />
-                    <Route path={SETTINGS_ROUTE} element={<SettingsPage />} />
-                    <Route element={<Footer />} />
-                </Route>
-            <Route path={HOME_ROUTE} element={<ControlPage />} />
-            <Route path={MONITORING_ROUTE} element={<MonitoringPage />} />
-            <Route path={SUS_ROUTE} element={<SusPage />} />
-            <Route path={SETTINGS_ROUTE} element={<SettingsPage />} />
-            <Route element={<Footer />} />
+            </Route>
+            <Route element={<GuardedRoute
+                isRouteAccessible={isAuthenticated}
+                redirectRoute={LOGIN_ROUTE}
+            />}>
+                <Route path={HOME_ROUTE} element={<ControlPage />} />
+                <Route path={MONITORING_ROUTE} element={<MonitoringPage />} />
+                <Route path={SUS_ROUTE} element={<SusPage />} />
+                <Route path={SETTINGS_ROUTE} element={<SettingsPage />} />
+                <Route element={<Footer />} />
+            </Route>
         </Routes>
         {isAuthenticated && <Footer />}
         </>

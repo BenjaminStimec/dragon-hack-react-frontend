@@ -24,10 +24,11 @@ export default function SetPage() {
     });
   };
 
-  return (
-    <>
-    <h1>Welcome</h1>
-    <div className="page">
+  return (    
+    <div className="page welcome">
+      <h1>Welcome</h1>
+      <div>Please provide your username
+and password</div>
     <Container component="main" maxWidth="sm">
       <Box
         sx={{
@@ -77,6 +78,5 @@ export default function SetPage() {
       </Box>
     </Container>
     </div>
-    </>
   );
 }
