@@ -14,27 +14,27 @@ function SettingsPage(){
     return (
         <div className="page">
             <List>
-                <ListItem disablePadding>
+                <ListItem className="device" disablePadding>
                     <ListItemButton>
                     <ListItemText primary="About" />
                     </ListItemButton>
                 </ListItem>
-                <ListItem disablePadding>
+                <ListItem className="device" disablePadding>
                     <ListItemButton>
                     <ListItemText primary="Credits" />
                     </ListItemButton>
                 </ListItem>
-                <ListItem disablePadding>
+                <ListItem className="device" disablePadding>
                     <ListItemButton>
                     <ListItemText primary="Setup" />
                     </ListItemButton>
                 </ListItem>
-                <ListItem disablePadding>
+                <ListItem className="device" disablePadding>
                     <ListItemButton>
                     <ListItemText primary="My Data" />
                     </ListItemButton>
                 </ListItem>
-                <ListItem disablePadding>
+                <ListItem className="device" disablePadding>
                     <ListItemButton>
                     <ListItemText primary="Reset Settings" />
                     </ListItemButton>

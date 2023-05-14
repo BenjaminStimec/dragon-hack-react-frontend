@@ -11,9 +11,10 @@ interface DeviceMonitoringProps {
 function DeviceMontioring(props: DeviceMonitoringProps) {
     return (
 
-        <div className="page">
-            //name + model_id display!
-            <DeviceGraph data={props.data} />
+        <div className="device">
+            <b className="deviceName">{props.name}</b> 
+            <br/><b>UID: </b>{props.model_id}
+            <br/><DeviceGraph data={props.data} />
         </div>
     )
 };

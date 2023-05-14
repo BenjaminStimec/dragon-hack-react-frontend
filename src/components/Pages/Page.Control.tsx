@@ -45,6 +45,7 @@ function ControlPage() {
 
     const handleAudioStop = async () => {
         const blob = new Blob(chunks, { 'type' : 'audio/wav' });
+        console.log(blob)
         const formData = new FormData();
         formData.append("audio", blob);
         try {

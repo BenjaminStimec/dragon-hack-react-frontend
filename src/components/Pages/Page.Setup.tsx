@@ -2,7 +2,7 @@ import { IconButton } from "@mui/material";
 import {Settings, MonitorHeartOutlined, NearMe, MicRounded} from "@mui/icons-material";
 import React from "react";
 import LoginButton from "../LoginButton";
-import Graph from "../Graph";
+import Graph from "../Monitoring/Graph";
 
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -22,6 +22,7 @@ export default function SetPage() {
       email: data.get("email"),
       password: data.get("password"),
     });
+
   };
 
   return (    
