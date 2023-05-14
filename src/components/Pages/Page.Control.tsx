@@ -3,14 +3,17 @@ import axios from "axios";
 import { IconButton, TextField, Button } from "@mui/material";
 import { MicRounded, Send } from "@mui/icons-material";
 import { Console } from "console";
+import { CircularProgress } from '@mui/material';
 
 function ControlPage() {
     const [recording, setRecording] = useState(false);
     const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(null);
     const [chunks, setChunks] = useState<BlobPart[]>([]);
     const [recordingText, setRecordingText] = useState("Press");
-    
+    const [loading, setLoadingState] = useState(false);
     const [stream, setStream] = useState<MediaStream|null>(null);
+
+    
 
     const handleClick = () => {
         if (!recording) {
@@ -26,6 +29,7 @@ function ControlPage() {
                     recorder.onstop = handleAudioStop;
                 });
         } else {
+            setLoadingState(true);
             setRecordingText("Press");
             // Stop recording
             if (mediaRecorder) {
@@ -49,7 +53,7 @@ function ControlPage() {
         
         // Send the response received to the other endpoint
         await axios.post("http://localhost:3000/openAI/string-upload", { "text": res.data });
-
+        setLoadingState(false);
     };
 
     const inputTextRef = useRef();
@@ -66,7 +70,7 @@ function ControlPage() {
     return (
         <div className="page">
             <div className="talkButton">
-                <IconButton color="primary" size="large" onClick={handleClick}><MicRounded />{recordingText}</IconButton>
+                {loading ?  <CircularProgress /> : <IconButton color="primary" size="large" onClick={handleClick}><MicRounded />{recordingText}</IconButton> }
             </div>
             <div className="inputTextContainer">
                 <TextField
