@@ -8,12 +8,15 @@ function ControlPage() {
     const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(null);
     const [chunks, setChunks] = useState<BlobPart[]>([]);
     
+    const [stream, setStream] = useState<MediaStream|null>(null);
+
     const handleClick = () => {
         if (!recording) {
             // Start recording
             navigator.mediaDevices.getUserMedia({ audio: true })
                 .then(stream => {
                     const recorder = new MediaRecorder(stream);
+                    setStream(stream); // Save the stream
                     setMediaRecorder(recorder);
                     recorder.start();
                     recorder.ondataavailable = e => setChunks(oldChunks => [...oldChunks, e.data]);
@@ -21,7 +24,13 @@ function ControlPage() {
                 });
         } else {
             // Stop recording
-            mediaRecorder && mediaRecorder.stop();
+            if (mediaRecorder) {
+                mediaRecorder.stop();
+                // Stop all tracks manually
+                if (stream) {
+                    stream.getTracks().forEach(track => track.stop());
+                }
+            }
         }
         setRecording(!recording);
     };
@@ -36,6 +45,7 @@ function ControlPage() {
         
         // Send the response received to the other endpoint
         await axios.post("http://localhost:3000/openAI/string-upload", { data: res.data });
+
     };
 
     return (
