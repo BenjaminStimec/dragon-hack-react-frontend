@@ -9,10 +9,12 @@ function Footer(){
     const [value, setValue] = React.useState(0);
     return (
         <div className="footer">
-        <BottomNavigation showLabels
-        value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue);
+        <BottomNavigation 
+            className="bottomNavigation"
+            showLabels
+            value={value}
+            onChange={(event, newValue) => {
+            setValue(newValue);
         }}>
             <BottomNavigationAction label="Control" icon={<MicRounded />} component={Link} to={HOME_ROUTE} />
             <BottomNavigationAction label="Monitoring" icon={<MonitorHeart />} component={Link} to={MONITORING_ROUTE} />

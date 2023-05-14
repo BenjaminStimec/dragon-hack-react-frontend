@@ -25,12 +25,32 @@ body{
 }
 .footer{
   height: 60px;
-  margin: 20px auto;
-  max-width: 1200px;
+  margin: 20px;
   
 }
 
-.css-16lloyr-MuiBottomNavigation-root {
+.inputTextContainer{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin: 0 20px !important;
+}
+
+.inputText{
+  max-width: 800px;
+  margin-right: 20px !important;
+  width: 100%;
+}
+
+@media screen and (min-width: 1240px) {
+  .footer{
+    max-width: 1200px;
+    margin: 20px auto;
+  }
+}
+
+.bottomNavigation {
   padding: 30px;
   backdrop-filter: blur(10px);
   background-color: initial !important;
