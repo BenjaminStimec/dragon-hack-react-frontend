@@ -47,12 +47,16 @@ function ControlPage() {
         const blob = new Blob(chunks, { 'type' : 'audio/wav' });
         const formData = new FormData();
         formData.append("audio", blob);
-
-        // Send the audio data
-        const res = await axios.post("http://localhost:3000/openAI/audio-upload", formData);
-        
-        // Send the response received to the other endpoint
-        await axios.post("http://localhost:3000/openAI/string-upload", { "text": res.data });
+        try {
+            // Send the audio data
+            const res = await axios.post("http://localhost:3000/openAI/audio-upload", formData);
+                    
+            // Send the response received to the other endpoint
+            await axios.post("http://localhost:3000/openAI/string-upload", { "text": res.data });
+        } catch(err) {
+            console.log(err);
+        }
+     
         setLoadingState(false);
     };
 
