@@ -40,12 +40,14 @@ function ControlPage() {
                 if (stream) {
                     stream.getTracks().forEach(track => track.stop());
                 }
+                
             }
         }
         setRecording(!recording);
     };
 
     const handleAudioStop = async () => {
+        console.log("stopped")
         const blob = new Blob(chunks, { 'type' : 'audio/wav' });
         console.log(blob)
         const formData = new FormData();
@@ -90,7 +92,6 @@ function ControlPage() {
                     multiline
                     maxRows={8}
                     inputRef={inputTextRef} 
-                    defaultValue=""
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
                 />
