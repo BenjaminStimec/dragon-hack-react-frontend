@@ -15,7 +15,7 @@ function SustainabilityPage() {
 
     useEffect(() => {
         const fetchDevices = async () => {
-            const res = await axios.get('http://localhost:3000/broker/graphs');
+            const res = await axios.get('http://localhost:3000/openAI/sustainability-data');
             setDevices(res.data);
         }
         fetchDevices();

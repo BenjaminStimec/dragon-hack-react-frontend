@@ -23,7 +23,7 @@ function MonitoringPage() {
 
     useEffect(() => {
         const fetchDevices = async () => {
-            const res = await axios.get('http://localhost:3000/openAI/graphs');
+            const res = await axios.get('http://localhost:3000/openAI/get-graphs');
             setDevices(res.data);
         }
         fetchDevices();
