@@ -19,13 +19,14 @@ function ControlPage() {
         if (!recording) {
             setRecordingText("Recording");
             // Start recording
+            //setStream(new MediaStream())
             navigator.mediaDevices.getUserMedia({ audio: true })
                 .then(stream => {
                     const recorder = new MediaRecorder(stream);
                     setStream(stream); // Save the stream
                     setMediaRecorder(recorder);
                     recorder.start();
-                    recorder.ondataavailable = e => setChunks(oldChunks => [...oldChunks, e.data]);
+                    recorder.ondataavailable = e => setChunks([e.data]);
                     recorder.onstop = handleAudioStop;
                 });
         } else {
@@ -51,6 +52,8 @@ function ControlPage() {
         try {
             // Send the audio data
             const res = await axios.post("http://localhost:3000/openAI/audio-upload", formData);
+            console.log(res);
+            setInputValue(res.data);
                     
             // Send the response received to the other endpoint
             await axios.post("http://localhost:3000/openAI/string-upload", { "text": res.data });
@@ -60,9 +63,8 @@ function ControlPage() {
      
         setLoadingState(false);
     };
-
-    const inputTextRef = useRef();
-
+    const [inputValue, setInputValue]  = useState("");
+    const inputTextRef = useRef("");
     const handleText = async () => {
         // Send the response received to the other endpoint
         var text = inputTextRef.current.value;
@@ -85,6 +87,7 @@ function ControlPage() {
                     multiline
                     maxRows={8}
                     inputRef={inputTextRef} 
+                    value={inputValue}
                 />
                 <Button variant="contained" endIcon={<Send />} onClick={handleText}>Send</Button>
             </div>
