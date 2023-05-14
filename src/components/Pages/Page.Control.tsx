@@ -8,9 +8,11 @@ function ControlPage() {
     const [recording, setRecording] = useState(false);
     const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(null);
     const [chunks, setChunks] = useState<BlobPart[]>([]);
+    const [recordingText, setRecordingText] = useState("Press");
     
     const handleClick = () => {
         if (!recording) {
+            setRecordingText("Recording");
             // Start recording
             navigator.mediaDevices.getUserMedia({ audio: true })
                 .then(stream => {
@@ -22,6 +24,7 @@ function ControlPage() {
                 });
         } else {
             // Stop recording
+            setRecordingText("Press");
             mediaRecorder && mediaRecorder.stop();
         }
         setRecording(!recording);
@@ -53,7 +56,7 @@ function ControlPage() {
     return (
         <div className="page">
             <div className="talkButton">
-                <IconButton color="primary" size="large" onClick={handleClick}><MicRounded />Press</IconButton>
+                <IconButton color="primary" size="large" onClick={handleClick}><MicRounded />{recordingText}</IconButton>
             </div>
             <div className="inputTextContainer">
                 <TextField
