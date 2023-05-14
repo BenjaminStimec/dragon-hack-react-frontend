@@ -25,8 +25,9 @@ function ControlPage() {
                     const recorder = new MediaRecorder(stream);
                     setStream(stream); // Save the stream
                     setMediaRecorder(recorder);
+                    setChunks([]);
                     recorder.start();
-                    recorder.ondataavailable = e => setChunks([e.data]);
+                    recorder.ondataavailable = e => setChunks(oldChunks => [...oldChunks, e.data]);
                     recorder.onstop = handleAudioStop;
                 });
         } else {
@@ -69,6 +70,8 @@ function ControlPage() {
         // Send the response received to the other endpoint
         var text = inputTextRef.current.value;
         if(!text || text.trim() === "") return;
+        console.log(text);
+
         await axios.post("http://localhost:3000/openAI/string-upload", { "text": text });
     };
 
@@ -87,7 +90,9 @@ function ControlPage() {
                     multiline
                     maxRows={8}
                     inputRef={inputTextRef} 
+                    defaultValue=""
                     value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
                 />
                 <Button variant="contained" endIcon={<Send />} onClick={handleText}>Send</Button>
             </div>

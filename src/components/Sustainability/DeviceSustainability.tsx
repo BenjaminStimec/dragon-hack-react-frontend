@@ -10,10 +10,11 @@ interface DeviceSustainabilityProps {
 function DeviceSustainability(props: DeviceSustainabilityProps) {
     return (
 
-        <div className="page">
-            //name + model_id display!
-            //tip display!
-        </div>
+        <div className="device">
+        <b className="deviceName">{props.name}</b> 
+        <br/><b>UID: </b>{props.model_id}
+        <br/>{props.tip} 
+    </div>
     )
 };
 

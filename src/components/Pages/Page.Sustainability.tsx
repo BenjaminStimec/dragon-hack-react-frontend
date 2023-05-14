@@ -31,12 +31,7 @@ function SustainabilityPage() {
                     tip={device.tip}
                 />
             )}
-            <div className="pieChart">
-            <PieChart/>
-            </div>
-            <h1>Device Usage</h1>
-            <div>Device usage</div>
-            <h1>Sustainability Tips</h1>
+            
         </div>
     )
 };
