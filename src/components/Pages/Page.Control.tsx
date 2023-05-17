@@ -8,7 +8,7 @@ import { CircularProgress } from '@mui/material';
 function ControlPage() {
     const [recording, setRecording] = useState(false);
     const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(null);
-    const [chunks, setChunks] = useState<BlobPart[]>([]);
+    //const [chunks, setChunks] = useState<BlobPart[]>([]);
     const [recordingText, setRecordingText] = useState("Press");
     const [loading, setLoadingState] = useState(false);
     const [stream, setStream] = useState<MediaStream|null>(null);
@@ -18,35 +18,29 @@ function ControlPage() {
     const handleClick = () => {
         if (!recording) {
             setRecordingText("Recording");
-            // Start recording
-            //setStream(new MediaStream())
             navigator.mediaDevices.getUserMedia({ audio: true })
                 .then(stream => {
                     const recorder = new MediaRecorder(stream);
-                    setStream(stream); // Save the stream
+                    setStream(stream); 
                     setMediaRecorder(recorder);
-                    setChunks([]);
+                    let currentChunks: BlobPart[] = [];
+                    recorder.ondataavailable = e => currentChunks.push(e.data);
+                    recorder.onstop = () => { 
+                        stream.getTracks().forEach(track => track.stop()); 
+                        handleAudioStop(currentChunks); 
+                    }
                     recorder.start();
-                    recorder.ondataavailable = e => setChunks(oldChunks => [...oldChunks, e.data]);
-                    recorder.onstop = handleAudioStop;
+
                 });
         } else {
             setLoadingState(true);
             setRecordingText("Press");
-            // Stop recording
-            if (mediaRecorder) {
-                mediaRecorder.stop();
-                // Stop all tracks manually
-                if (stream) {
-                    stream.getTracks().forEach(track => track.stop());
-                }
-                
-            }
+            if (mediaRecorder) mediaRecorder.stop();  
         }
         setRecording(!recording);
     };
 
-    const handleAudioStop = async () => {
+    const handleAudioStop = async (chunks: BlobPart[]) => {
         console.log("stopped")
         const blob = new Blob(chunks, { 'type' : 'audio/wav' });
         console.log(blob)
